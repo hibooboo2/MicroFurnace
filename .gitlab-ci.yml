@@ -5,9 +5,10 @@ build:
   stage: build
   image: alpine
   before_script:
-  - apk add zip jq
+  - apk add zip jq git
   script: ./build.sh
+  only: tags
   artifacts:
     paths:
     - "*.zip"
-    expire_in: 1 year
+    expire_in: 0
