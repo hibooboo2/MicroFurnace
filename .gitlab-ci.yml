@@ -7,8 +7,9 @@ build:
   before_script:
   - apk add zip jq git
   script: ./build.sh
-  only: tags
+  only:
+  - tags
   artifacts:
     paths:
     - "*.zip"
-    expire_in: 0
+    expire_in: 1 year
