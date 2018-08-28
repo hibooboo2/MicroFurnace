@@ -1,7 +1,6 @@
 #!/bin/sh
 name=$(jq -r ".name" info.json)
 version=$(jq -r ".version" info.json)
-target_filename="${name}_${version}.zip"
+target_filename="${name}_${version}"
 
-rm -f $target_filename
-zip -9 -r -x *.git* .gitignore build.sh .gitlab-ci.yml @ $target_filename .
+git archive HEAD --prefix="${name}_${version}/" --format=zip -o "${name}_${version}.zip" -9 
