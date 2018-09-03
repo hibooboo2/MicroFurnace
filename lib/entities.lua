@@ -27,7 +27,11 @@ local function micro_furnace_entity(data)
     ingredient_count = 4,
     crafting_speed = tier.multiplier * 140/3,
     energy_usage = tier.multiplier * 8640 .. "kW",
-    energy_source = {type = "electric", usage_priority = "secondary-input", emmisions = 0.005},
+    energy_source = {
+      type = "electric",
+      usage_priority = "secondary-input",
+      emissions = 0.005,
+    },
     vehicle_impact_sound = {filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65},
     working_sound = {
       sound = {filename = "__base__/sound/electric-furnace.ogg", volume = 0.7},
