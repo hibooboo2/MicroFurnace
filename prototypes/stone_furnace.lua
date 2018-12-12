@@ -207,6 +207,17 @@ local stone_micro_furnace = {
 			if d.tier.multiplier == 5 then
 				return d.raw.technology["bob-logistics-5"].unit.ingredients
 			end
+			if d.tier.multiplier == 1 then
+				return {
+					{"science-pack-1", 1},
+				}
+			end
+			if d.tier.multiplier == 2 then
+				return {
+					{"science-pack-1", 1},
+					{"science-pack-2", 1},
+				}
+			end
 			return {
 				{"science-pack-1", 1},
 				{"science-pack-2", 1},
@@ -221,7 +232,7 @@ local stone_micro_furnace = {
 			effects = {{type = "unlock-recipe", recipe = d.name }},
 			prerequisites = {"loader"},
 			unit = {
-			  count = 100,
+			  count = 50,
 			  time = 30,
 			  ingredients = getIngredients(d),
 			},
