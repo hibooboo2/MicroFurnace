@@ -160,26 +160,35 @@ local electric_micro_furnace = {
 		  }
 		  return recipe
 	end,
-	technology = function(data)
+	technology = function(d)
+		local function getIngredients(d)
+			if d.tier.multiplier == 4 then
+				return data.raw.technology["bob-logistics-4"].unit.ingredients
+			end
+			if d.tier.multiplier == 5 then
+				return data.raw.technology["bob-logistics-5"].unit.ingredients
+			end
+			return {
+				{"science-pack-1", 1},
+				{"science-pack-2", 1},
+				{"science-pack-3", 1},
+			}
+		end
 		local tech =  {
 			type = "technology",
-			name = data.name,
+			name = d.name,
 			icon_size = 128,
 			icon = "__base__/graphics/technology/advanced-material-processing.png",
-			effects = {{type = "unlock-recipe", recipe = data.name }},
+			effects = {{type = "unlock-recipe", recipe = d.name }},
 			prerequisites = {"advanced-material-processing-2", "loader"},
 			unit = {
 			  count = 200,
 			  time = 30,
-			  ingredients = {
-				{"science-pack-1", 1},
-				{"science-pack-2", 1},
-				{"science-pack-3", 1},
-			  },
+			  ingredients = getIngredients(d),
 			},
-			order = "c-d-"..data.order,
+			order = "c-d-"..d.order,
 		  }
-		for i=0,data.tier.multiplier-2 do
+		for i=0,d.tier.multiplier-2 do
 			tech.unit.count = tech.unit.count * 2
 		end
 		return tech

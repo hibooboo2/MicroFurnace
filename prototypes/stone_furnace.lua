@@ -50,13 +50,13 @@ local stone_micro_furnace = {
 				fuel_category = "chemical",
 				effectivity = 1,
 				fuel_inventory_size = 1,
-				emissions = 0.05,
+				emissions = 0.01,
 				smoke =
 				{
 					{
 						name = "smoke",
 						deviation = {0.1, 0.1},
-						frequency = 5,
+						frequency = 5*24*tier.multiplier,
 						position = {0.0, -0.8},
 						starting_vertical_speed = 0.08,
 						starting_frame_deviation = 60
@@ -175,7 +175,7 @@ local stone_micro_furnace = {
 			  ingredients = {
 				{"stone-furnace", 48 * multiplier},
 				{"loader", 2 * multiplier},
-				{"steel-plate", 20 * multiplier},
+				{"iron-plate", 20 * multiplier},
 				{"electronic-circuit", 10 * multiplier},
 				{"iron-gear-wheel", 10 * multiplier },
 				{"iron-stick", 10 * multiplier },
@@ -188,7 +188,7 @@ local stone_micro_furnace = {
 			  ingredients = {
 				{"stone-furnace", 48 * 2 * multiplier},
 				{"loader", 2 * 2 * multiplier},
-				{"steel-plate", 20 * 2 * multiplier},
+				{"iron-plate", 20 * 2 * multiplier},
 				{"electronic-circuit", 10 * 2 * multiplier},
 				{"iron-gear-wheel", 10 * 2 * multiplier },
 				{"iron-stick", 10 * 2 * multiplier },
@@ -202,10 +202,10 @@ local stone_micro_furnace = {
 	technology = function(d)
 		local function getIngredients()
 			if d.tier.multiplier == 4 then
-				return data.raw.technology["bob-logistics-4"].unit.ingredients
+				return d.raw.technology["bob-logistics-4"].unit.ingredients
 			end
 			if d.tier.multiplier == 5 then
-				return data.raw.technology["bob-logistics-5"].unit.ingredients
+				return d.raw.technology["bob-logistics-5"].unit.ingredients
 			end
 			return {
 				{"science-pack-1", 1},
