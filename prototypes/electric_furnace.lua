@@ -127,33 +127,51 @@ local electric_micro_furnace = {
 	end,
 	recipe = function(data)
 		local multiplier = data.tier.multiplier
+		local function getIngredients()
+			if multiplier == 1 then
+				return {
+					{"electric-furnace", 24},
+					{"loader", 2},
+					{"steel-plate", 50},
+					{"advanced-circuit", 20},
+					{"iron-gear-wheel", 20},
+					{"iron-stick", 20},
+				}
+			end
+			return {
+				{"electric-micro-furnace", multiplier},
+				{"electronic-circuit", 20*multiplier},
+			}
+		end
+		local function getExpensiveIngredients()
+			if multiplier == 1 then
+				return {
+					{"electric-furnace", 24 * 2 * multiplier},
+					{"loader", 2 * 2 * multiplier},
+					{"steel-plate", 50 * 2 * multiplier},
+					{"advanced-circuit", 20 * 2 * multiplier},
+					{"iron-gear-wheel", 20 * 2 * multiplier },
+					{"iron-stick", 20 * 2 * multiplier },
+				}
+			end
+			return {
+				{"electric-micro-furnace", multiplier*2},
+				{"electronic-circuit", 20*multiplier*2},
+			}
+		end
 		local recipe = {
 			type = "recipe",
 			category = "advanced-crafting",
 			name = data.name,
 			normal = {
 			  enabled = false,
-			  ingredients = {
-				{"electric-furnace", 24 * multiplier},
-				{"loader", 2 * multiplier},
-				{"steel-plate", 50 * multiplier},
-				{"advanced-circuit", 20 * multiplier},
-				{"iron-gear-wheel", 20 * multiplier },
-				{"iron-stick", 20 * multiplier },
-			  },
+			  ingredients = getIngredients(),
 			  energy_required = 30,
 			  result = data.name,
 			},
 			expensive = {
 			  enabled = false,
-			  ingredients = {
-				{"electric-furnace", 24 * 2 * multiplier},
-				{"loader", 2 * 2 * multiplier},
-				{"steel-plate", 50 * 2 * multiplier},
-				{"advanced-circuit", 20 * 2 * multiplier},
-				{"iron-gear-wheel", 20 * 2 * multiplier },
-				{"iron-stick", 20 * 2 * multiplier },
-			  },
+			  ingredients = getExpensiveIngredients(),
 			  energy_required = 120,
 			  result = data.name,
 			},

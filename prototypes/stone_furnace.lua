@@ -165,6 +165,38 @@ local stone_micro_furnace = {
 		}
 	end,
 	recipe = function(d)
+		local function getIngredients()
+			if d.tier.multiplier == 1 then
+				return {
+					{"stone-furnace", 48},
+					{"loader", 2},
+					{"iron-plate", 20},
+					{"electronic-circuit", 10},
+					{"iron-gear-wheel", 10 },
+					{"iron-stick", 10 },
+				}
+			end
+			return {
+				{"stone-micro-furnace", d.tier.multiplier},
+				{"electronic-circuit", 10*d.tier.multiplier},
+			}
+		end
+		local function getExpensiveIngredients()
+			if d.tier.multiplier == 1 then
+				return {
+					{"stone-furnace", 48 *2},
+					{"loader", 2*2},
+					{"iron-plate", 20*2},
+					{"electronic-circuit", 10*2},
+					{"iron-gear-wheel", 10*2},
+					{"iron-stick", 10*2},
+				}
+			end
+			return {
+				{"stone-micro-furnace", d.tier.multiplier*2},
+				{"electronic-circuit", 10*d.tier.multiplier*2},
+			}
+		end
 		local multiplier = d.tier.multiplier
 		local recipe = {
 			type = "recipe",
@@ -172,27 +204,13 @@ local stone_micro_furnace = {
 			name = d.name,
 			normal = {
 			  enabled = false,
-			  ingredients = {
-				{"stone-furnace", 48 * multiplier},
-				{"loader", 2 * multiplier},
-				{"iron-plate", 20 * multiplier},
-				{"electronic-circuit", 10 * multiplier},
-				{"iron-gear-wheel", 10 * multiplier },
-				{"iron-stick", 10 * multiplier },
-			  },
+			  ingredients = getIngredients(),
 			  energy_required = 30,
 			  result = d.name,
 			},
 			expensive = {
 			  enabled = false,
-			  ingredients = {
-				{"stone-furnace", 48 * 2 * multiplier},
-				{"loader", 2 * 2 * multiplier},
-				{"iron-plate", 20 * 2 * multiplier},
-				{"electronic-circuit", 10 * 2 * multiplier},
-				{"iron-gear-wheel", 10 * 2 * multiplier },
-				{"iron-stick", 10 * 2 * multiplier },
-			  },
+			  ingredients = getExpensiveIngredients(),
 			  energy_required = 120,
 			  result = d.name,
 			},
