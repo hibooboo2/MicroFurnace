@@ -1,11 +1,11 @@
 -- This is just for when testing locally
-if data == nil then
-  data = {}
-  data.extend = function(dataSentIn, data)
-  end
-  mods = {}
-  -- mods.boblogistics = "fsda"  
-end
+-- if data == nil then
+--   data = {}
+--   data.extend = function(dataSentIn, data)
+--   end
+--   mods = {}
+--   -- mods.boblogistics = "fsda"  
+-- end
 -- End
 
 local electric_micro_furnace = {
@@ -227,13 +227,7 @@ local names = {
   "micro-ultimate-furnace",
 }
 
-local lastTier = 3
 
-
-
-if mods["boblogistics"] then
-  lastTier = 5
-end
 
 data:extend{
   {
@@ -269,7 +263,7 @@ data:extend{
       icon_size = 128,
       icon = "__base__/graphics/technology/steel-processing.png",
       effects = {{type = "unlock-recipe", recipe = "micro-steel-plate"}},
-      prerequisites = {"steel-processing", "micro-fast-furnace"},
+      prerequisites = {"steel-processing"},
       unit = {
         count = 200,
         time = 30,
@@ -281,7 +275,15 @@ data:extend{
       },
       order = "c-e-a",
   },
-}  
+}
+
+local lastTier = 3
+
+
+
+if mods["boblogistics"] then
+  lastTier = 5
+end  
 
 for i=1,lastTier do
   local tier = tiersMade[i]
@@ -301,13 +303,13 @@ for i=1,lastTier do
       }
       local entity = micro_furnace.entity(d)
       local recipe = micro_furnace.recipe(d)
-      local technology = micro_furnace.technology(d)      
+      local technology = micro_furnace.technology(d)
       local item = micro_furnace.item(d)
       data:extend{
           entity,
           item,
           recipe,
           technology,
-      }    
+      }
   end
 end
